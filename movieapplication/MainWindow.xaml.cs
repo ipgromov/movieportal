@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace movieapplication
 {
@@ -25,9 +27,7 @@ namespace movieapplication
         public MainWindow()
         {
             InitializeComponent();
-
-            _movies.Add(new Movie("Под покровом ночи", 2016, "США", "Триллер"));
-            _movies.Add(new Movie("Ла-Ла Ленд", 2016, "США", "Мюзикл"));
+            LoadData();
             RefreshListBox();
         }
 
@@ -37,6 +37,7 @@ namespace movieapplication
             if (window.ShowDialog().Value)
             {
                 _movies.Add(window.newMovie);
+                UpdateData();
                 RefreshListBox();
             }
         }
@@ -46,6 +47,7 @@ namespace movieapplication
             if (listBox.SelectedIndex != -1)
             {
                 _movies.RemoveAt(listBox.SelectedIndex);
+                UpdateData();
                 RefreshListBox();
             }
         }
@@ -54,6 +56,24 @@ namespace movieapplication
         {
             // If selected index = -1, we set IsEnabled to false
             buttonRemove.IsEnabled = listBox.SelectedIndex != -1;
+        }
+
+        private void LoadData()
+        {
+            using (FileStream fs = new FileStream("data.xml", FileMode.Open))
+            {
+                XmlSerializer xml = new XmlSerializer(typeof(List<Movie>));
+                _movies = (List<Movie>)xml.Deserialize(fs);
+            }
+        }
+
+        private void UpdateData()
+        {
+            using (FileStream fs = new FileStream("data.xml", FileMode.Create))
+            {
+                XmlSerializer xml = new XmlSerializer(typeof(List<Movie>));
+                xml.Serialize(fs, _movies);
+            }
         }
 
         private void RefreshListBox()

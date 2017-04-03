@@ -40,6 +40,11 @@ namespace movieapplication
             set { _genre = value; }
         }
 
+        public Movie()
+        {
+
+        }
+
         public Movie(string name, int year, string country, string genre)
         {
             _name = name;
