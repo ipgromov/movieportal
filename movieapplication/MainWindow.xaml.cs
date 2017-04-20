@@ -24,6 +24,10 @@ namespace movieapplication
     {
         List<Movie> _movies = new List<Movie>();
 
+        List<Movie> _moviesSearch = new List<Movie>();
+
+        bool isSearched = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -55,15 +59,21 @@ namespace movieapplication
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // If selected index = -1, we set IsEnabled to false
-            buttonRemove.IsEnabled = listBox.SelectedIndex != -1;
+            if (!isSearched)
+            {
+                buttonRemove.IsEnabled = listBox.SelectedIndex != -1;
+            }
         }
 
         private void LoadData()
         {
-            using (FileStream fs = new FileStream("data.xml", FileMode.Open))
+            if (File.Exists("data.xml"))
             {
-                XmlSerializer xml = new XmlSerializer(typeof(List<Movie>));
-                _movies = (List<Movie>)xml.Deserialize(fs);
+                using (FileStream fs = new FileStream("data.xml", FileMode.Open))
+                {
+                    XmlSerializer xml = new XmlSerializer(typeof(List<Movie>));
+                    _movies = (List<Movie>)xml.Deserialize(fs);
+                }
             }
         }
 
@@ -80,6 +90,38 @@ namespace movieapplication
         {
             listBox.ItemsSource = null;
             listBox.ItemsSource = _movies;
+        }
+
+        private void buttonSearch_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new SearchWindow();
+            if (window.ShowDialog().Value)
+            {
+                isSearched = true;
+                buttonRemove.IsEnabled = false;
+                buttonReset.IsEnabled = true;
+                string searchQuery = window.searchQuery;
+                _moviesSearch = new List<Movie>();
+                foreach (Movie movie in _movies)
+                {
+                    if (movie.name == searchQuery)
+                    {
+                        _moviesSearch.Add(movie);
+                    }
+                }
+                listBox.ItemsSource = _moviesSearch;
+                if (_moviesSearch.Count == 0)
+                {
+                    MessageBox.Show("Фильмов с таким названием нет", "Результат поиска");
+                }
+            }
+        }
+
+        private void buttonReset_Click(object sender, RoutedEventArgs e)
+        {
+            isSearched = false;
+            buttonReset.IsEnabled = false;
+            RefreshListBox();
         }
     }
 }
