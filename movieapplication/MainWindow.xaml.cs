@@ -31,6 +31,7 @@ namespace movieapplication
         public MainWindow()
         {
             InitializeComponent();
+            Logger.Log("Запуск программы");
             LoadData();
             RefreshListBox();
         }
@@ -43,6 +44,7 @@ namespace movieapplication
                 _movies.Add(window.newMovie);
                 UpdateData();
                 RefreshListBox();
+                Logger.Log($"Добавлен новый фильм: \"{window.newMovie.name}\"");
             }
         }
 
@@ -50,9 +52,11 @@ namespace movieapplication
         {
             if (listBox.SelectedIndex != -1)
             {
+                Movie temp = _movies[listBox.SelectedIndex];
                 _movies.RemoveAt(listBox.SelectedIndex);
                 UpdateData();
                 RefreshListBox();
+                Logger.Log($"Удален фильм: \"{temp.name}\"");
             }
         }
 
@@ -114,6 +118,7 @@ namespace movieapplication
                 {
                     MessageBox.Show("Фильмов с таким названием нет", "Результат поиска");
                 }
+                Logger.Log($"Поиск с запросом: \"{searchQuery}\"");
             }
         }
 
@@ -122,6 +127,7 @@ namespace movieapplication
             isSearched = false;
             buttonReset.IsEnabled = false;
             RefreshListBox();
+            Logger.Log($"Отмена фильтрации по поисковому запросу");
         }
     }
 }
