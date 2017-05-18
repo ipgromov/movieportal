@@ -5,24 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:movieapplication"
         mc:Ignorable="d"
-        Title="Кинематографичский портал" Height="500" Width="750">
+        Title="Кинематографичский портал" Height="540" Width="770" ResizeMode="NoResize">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="7*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
-        <ListBox x:Name="listBox" DisplayMemberPath="Info" SelectionChanged="listBox_SelectionChanged" Margin="10,10" Grid.RowSpan="5"/>
-        <Button x:Name="buttonCreate" Content="Добавить" Grid.Column="1" Margin="10,10" Click="buttonCreate_Click"/>
-        <Button x:Name="buttonRemove" Content="Удалить" Grid.Column="1" Grid.Row="1" Margin="10,10" Click="buttonRemove_Click" IsEnabled="False"/>
-        <Button x:Name="buttonSearch" Content="Поиск" Grid.Column="1" Grid.Row="2" Margin="10, 10" Click="buttonSearch_Click"/>
-        <Button x:Name="buttonReset" Content="Сброс поиска" Grid.Column="1" Grid.Row="3" Margin="10,10" Click="buttonReset_Click" IsEnabled="False"/>
+        <Frame Name="frameMain" NavigationUIVisibility="Hidden">
 
+        </Frame>
     </Grid>
 </Window>

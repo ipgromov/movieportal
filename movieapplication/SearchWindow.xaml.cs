@@ -22,7 +22,7 @@ namespace movieapplication
 
         private string _searchQuery;
 
-        public string searchQuery
+        public string SearchQuery
         {
             get { return _searchQuery; }
         }

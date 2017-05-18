@@ -11,8 +11,6 @@ namespace movieapplication
     {
         public static void Log (string message)
         {
-            //if (File.Exists("log.txt"))
-            //{
                 using (FileStream fs = new FileStream("log.txt", FileMode.Append, FileAccess.Write))
                 {
                     using (StreamWriter sw = new StreamWriter(fs))
@@ -20,7 +18,17 @@ namespace movieapplication
                         sw.WriteLine($"{DateTime.Now} - {message}");
                     }
                 }
-            //}
+        }
+
+        public static void Divider()
+        {
+            using (FileStream fs = new FileStream("log.txt", FileMode.Append, FileAccess.Write))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.WriteLine(new string('-', 40));
+                }
+            }
         }
     }
 }
