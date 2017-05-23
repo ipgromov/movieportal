@@ -8,9 +8,17 @@ namespace movieapplication
 {
     public class Movie
     {
+        private int _id;
+
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
         private string _name;
 
-        public string name
+        public string Name
         {
             get { return _name; }
             set { _name = value; }
@@ -18,7 +26,7 @@ namespace movieapplication
 
         private int _year;
 
-        public int year
+        public int Year
         {
             get { return _year; }
             set { _year = value; }
@@ -26,7 +34,7 @@ namespace movieapplication
 
         private string _country;
 
-        public string country
+        public string Country
         {
             get { return _country; }
             set { _country = value; }
@@ -34,7 +42,7 @@ namespace movieapplication
 
         private string _genre;
 
-        public string genre
+        public string Genre
         {
             get { return _genre; }
             set { _genre = value; }
@@ -47,6 +55,16 @@ namespace movieapplication
 
         public Movie(string name, int year, string country, string genre)
         {
+            _id = IdFormer();
+            _name = name;
+            _year = year;
+            _country = country;
+            _genre = genre;
+        }
+
+        public Movie(int id, string name, int year, string country, string genre)
+        {
+            _id = id;
             _name = name;
             _year = year;
             _country = country;
@@ -59,6 +77,19 @@ namespace movieapplication
             {
                 return $"{_name} ({_year}), {_country}. Жанр: {_genre}.";
             }
+        }
+
+        private int IdFormer()
+        {
+            int maxId = 0;
+            foreach (Movie movie in Data.Movies)
+            {
+                if (movie.Id > maxId)
+                {
+                    maxId = movie.Id;
+                }
+            }
+            return maxId+1;
         }
     }
 }

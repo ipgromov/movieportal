@@ -5,24 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:movieapplication"
         mc:Ignorable="d"
-        Title="Кинематографичский портал" Height="500" Width="750">
+        Title="Кинематографичский портал" Height="500" Width="750" Loaded="Page_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="listBox" DisplayMemberPath="Info" Margin="10,10" Grid.RowSpan="6"/>
-        <Button x:Name="buttonSearch" Content="Поиск" Grid.Column="1" Grid.Row="0" Margin="10, 10" Click="buttonSearch_Click"/>
-        <Button x:Name="buttonReset" Content="Сброс поиска" Grid.Column="1" Grid.Row="1" Margin="10,10" Click="buttonReset_Click" IsEnabled="False"/>
-        <Button x:Name="buttonLogin" Content="Вход администратора" Grid.Column="1" Grid.Row="5" Margin="10,10" Click="buttonLogin_Click"/>
+        <ListBox x:Name="listBox" DisplayMemberPath="Info" Margin="10,10" Grid.RowSpan="8" FontSize="13.333"/>
+        <Button x:Name="buttonSearch" Content="Поиск" Grid.Column="1" Grid.Row="1" Margin="10, 10" Click="buttonSearch_Click" FontSize="16"/>
+        <Button x:Name="buttonReset" Content="Сброс поиска" Grid.Column="1" Grid.Row="2" Margin="10,10" Click="buttonReset_Click" IsEnabled="False" FontSize="16"/>
+        <Button x:Name="buttonLogin" Content="Войти" Grid.Column="1" Grid.Row="7" Margin="10,10" Click="buttonLogin_Click" FontSize="16"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Grid.Row="6" TextWrapping="Wrap" Text="Здравствуйте, гость!" VerticalAlignment="Bottom" FontSize="16"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" Text="Быстрый поиск" VerticalAlignment="Top" FontSize="16" Margin="10"/>
+        <TextBox x:Name="textBoxSearch" Grid.Column="1" HorizontalAlignment="Center" Height="22" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="205" TextChanged="textBoxSearch_TextChanged"/>
     </Grid>
 </Page
       >

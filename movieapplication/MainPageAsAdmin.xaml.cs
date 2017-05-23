@@ -23,6 +23,8 @@ namespace movieapplication
     public partial class MainPageAsAdmin : Page
     {
 
+        private List<Movie> dynamicMoviesSearch = new List<Movie>();
+
         public MainPageAsAdmin()
         {
             InitializeComponent();
@@ -37,9 +39,11 @@ namespace movieapplication
             {
                 Data.Movies.Add(window.newMovie);
                 Data.UpdateMoviesData();
-                RefreshListBox();
                 Data.IsSearched = false;
-                Logger.Log($"Добавлен новый фильм: \"{window.newMovie.name}\"");
+                buttonReset.IsEnabled = false;
+                RefreshListBox();
+                DisableButtons();
+                Logger.Log($"Добавлен новый фильм: \"{window.newMovie.Name}\"");
             }
         }
 
@@ -47,21 +51,42 @@ namespace movieapplication
         {
             if (listBox.SelectedIndex != -1)
             {
-                Movie temp = Data.Movies[listBox.SelectedIndex];
-                Data.Movies.RemoveAt(listBox.SelectedIndex);
+                Movie selectedMovie = (Movie)listBox.SelectedItem;
+                Data.Movies.RemoveAll(movie => movie.Id == selectedMovie.Id);
+                if (Data.IsSearched)
+                    Data.MoviesSearch.RemoveAll(movie => movie.Id == selectedMovie.Id);
+
                 Data.UpdateMoviesData();
                 RefreshListBox();
-                Logger.Log($"Удален фильм: \"{temp.name}\"");
+                Logger.Log($"Удален фильм: \"{selectedMovie.Name}\"");
+            }
+        }
+
+        private void buttonUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            if (listBox.SelectedIndex != -1)
+            {
+                Movie selectedMovie = (Movie)listBox.SelectedItem;
+                int selectedListIndex = Data.Movies.FindIndex(movie => movie.Id == selectedMovie.Id);
+
+                var window = new ChangeMovieWindow(Data.Movies[selectedListIndex]);
+                if (window.ShowDialog().Value)
+                {
+                    Data.Movies[selectedListIndex] = window.changedMovie;
+                    Data.UpdateMoviesData();
+                    Data.IsSearched = false;
+                    RefreshListBox();
+                    DisableButtons();
+                    Logger.Log(selectedMovie.Name == window.changedMovie.Name ? 
+                        $"Изменён фильм: \"{window.changedMovie.Name}\"" : 
+                        $"Изменён фильм: \"{selectedMovie.Name}\" -> \"{window.changedMovie.Name}\"");
+                }
             }
         }
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // If selected index = -1, we set IsEnabled to false
-            if (!Data.IsSearched)
-            {
-                buttonRemove.IsEnabled = listBox.SelectedIndex != -1;
-            }
+                DisableButtons();
         }
 
 
@@ -80,7 +105,7 @@ namespace movieapplication
                 Data.MoviesSearch = new List<Movie>();
                 foreach (Movie movie in Data.Movies)
                 {
-                    if (movie.name.ToLower().Contains(searchQuery.ToLower()))
+                    if (movie.Name.ToLower().Contains(searchQuery.ToLower()))
                     {
                         Data.MoviesSearch.Add(movie);
                     }
@@ -92,10 +117,9 @@ namespace movieapplication
                 else
                 {
                     Data.IsSearched = true;
-                    buttonRemove.IsEnabled = false;
                     buttonReset.IsEnabled = true;
+                    textBoxSearch.Text = "";
                     RefreshListBox();
-                    Pages.MainPage.EnterSearchState();
                 }
                 Logger.Log($"Поиск с запросом: \"{searchQuery}\"");
             }
@@ -105,31 +129,56 @@ namespace movieapplication
         {
             Data.IsSearched = false;
             buttonReset.IsEnabled = false;
+            textBoxSearch.Text = "";
             RefreshListBox();
-            Pages.MainPage.LeaveSearchState();
             Logger.Log($"Отмена фильтрации по поисковому запросу");
         }
 
         private void buttonLogout_Click(object sender, RoutedEventArgs e)
         {
-            if (Data.IsSearched)
-                Pages.MainPage.EnterSearchState();
+            Pages.MainPage.UpdateSearchState();
             Logger.Log($"Выход из системы пользователя: \"{Data.LoggedUser.Username}\"");
             Data.LoggedUser = null;
             NavigationService.Navigate(Pages.MainPage);
+            listBox.SelectedIndex = -1;
         }
 
-        public void EnterSearchState()
+        public void UpdateSearchState()
         {
-            buttonRemove.IsEnabled = false;
-            buttonReset.IsEnabled = true;
+            if (Data.IsSearched)
+                buttonReset.IsEnabled = true;
+            else
+                buttonReset.IsEnabled = false;
             RefreshListBox();
         }
 
-        public void LeaveSearchState()
+
+        private void DisableButtons()
         {
-            buttonReset.IsEnabled = false;
-            RefreshListBox();
+            buttonRemove.IsEnabled = listBox.SelectedIndex != -1;
+            buttonUpdate.IsEnabled = listBox.SelectedIndex != -1;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Data.LoggedUser != null)
+                textBlockGreeting.Text = $"Здравствуйте, {Data.LoggedUser.Username}!";
+            textBoxSearch.Text = "";
+        }
+
+        private void textBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string dynamicSearchQuery = textBoxSearch.Text;
+            dynamicMoviesSearch = new List<Movie>();
+            foreach (Movie movie in Data.IsSearched ? Data.MoviesSearch : Data.Movies)
+            {
+                if (movie.Name.ToLower().Contains(dynamicSearchQuery.ToLower()))
+                {
+                    dynamicMoviesSearch.Add(movie);
+                }
+            }
+            listBox.ItemsSource = null;
+            listBox.ItemsSource = dynamicMoviesSearch;
         }
     }
 }

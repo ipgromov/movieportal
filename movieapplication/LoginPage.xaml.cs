@@ -45,8 +45,17 @@ namespace movieapplication
                             {
                                 Pages.ChangeFrameSize(500, 750);
                                 Data.LoggedUser = user;
-                                Logger.Log($"Успешный вход пользователя: \"{username}\"");
-                                NavigationService.Navigate(Pages.MainPageAsAdmin);
+                                Logger.Log($"Успешный вход пользователя: \"{username}\" ({(user.IsAdmin ? "администратор" : "обычный пользователь")})");
+                                if (user.IsAdmin)
+                                {
+                                    Pages.MainPageAsAdmin.UpdateSearchState();
+                                    NavigationService.Navigate(Pages.MainPageAsAdmin);
+                                }
+                                else
+                                {
+                                    Pages.MainPageAsUser.UpdateSearchState();
+                                    NavigationService.Navigate(Pages.MainPageAsUser);
+                                }
                                 textBoxUsername.Text = "";
                             }
                             else
@@ -90,10 +99,15 @@ namespace movieapplication
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
         {
-            if (Data.IsSearched)
-                Pages.MainPage.EnterSearchState();
+            Pages.MainPage.UpdateSearchState();
             Pages.ChangeFrameSize(500, 750);
             NavigationService.Navigate(Pages.MainPage);
+        }
+
+        private void buttonSignUp_Click(object sender, RoutedEventArgs e)
+        {
+            Pages.ChangeFrameSize(400, 370);
+            NavigationService.Navigate(Pages.SignUpPage);
         }
     }
 }

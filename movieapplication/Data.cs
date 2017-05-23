@@ -91,5 +91,21 @@ namespace movieapplication
                 }
             }
         }
+
+        static public bool checkUsernameValidity(string username)
+        {
+            return username.All(c => (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_' || char.IsDigit(c));
+        }
+
+        static public bool checkIfUsernameIsUsed(string username)
+        {
+            ReadUsersData();
+            foreach (User user in Data.Users)
+            {
+                if (user.Username == username)
+                    return false;
+            }
+            return true;
+        }
     }
 }

@@ -20,12 +20,11 @@ namespace movieapplication
     /// <summary>
     /// Логика взаимодействия для MainPage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class MainPageAsUser : Page
     {
-
         private List<Movie> dynamicMoviesSearch = new List<Movie>();
 
-        public MainPage()
+        public MainPageAsUser()
         {
             InitializeComponent();
             Data.ReadMoviesData();
@@ -71,15 +70,18 @@ namespace movieapplication
         {
             Data.IsSearched = false;
             buttonReset.IsEnabled = false;
-            RefreshListBox();
             textBoxSearch.Text = "";
+            RefreshListBox();
             Logger.Log($"Отмена фильтрации по поисковому запросу");
         }
 
-        private void buttonLogin_Click(object sender, RoutedEventArgs e)
+        private void buttonLogout_Click(object sender, RoutedEventArgs e)
         {
-            Pages.ChangeFrameSize(220, 220);
-            NavigationService.Navigate(Pages.LoginPage);
+            Pages.MainPage.UpdateSearchState();
+            Logger.Log($"Выход из системы пользователя: \"{Data.LoggedUser.Username}\"");
+            Data.LoggedUser = null;
+            NavigationService.Navigate(Pages.MainPage);
+            listBox.SelectedIndex = -1;
         }
 
         public void UpdateSearchState()
@@ -89,6 +91,13 @@ namespace movieapplication
             else
                 buttonReset.IsEnabled = false;
             RefreshListBox();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Data.LoggedUser != null)
+                textBlockGreeting.Text = $"Здравствуйте, {Data.LoggedUser.Username}!";
+            textBoxSearch.Text = "";
         }
 
         private void textBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -104,11 +113,6 @@ namespace movieapplication
             }
             listBox.ItemsSource = null;
             listBox.ItemsSource = dynamicMoviesSearch;
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            textBoxSearch.Text = "";
         }
     }
 }

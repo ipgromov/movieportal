@@ -9,14 +9,6 @@ namespace movieapplication
 {
     public class User
     {
-        private int _id;
-
-        public int Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
-
         private string _username;
 
         public string Username
@@ -24,6 +16,23 @@ namespace movieapplication
             get { return _username; }
             set { _username = value; }
         }
+
+        private string _name;
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+
+        private string _surname;
+
+        public string Surname
+        {
+            get { return _surname; }
+            set { _surname = value; }
+        }
+
 
         private string _password;
 
@@ -33,10 +42,21 @@ namespace movieapplication
             set { _password = value; }
         }
 
-        public User(string username, string password)
+        private bool _isAdmin;
+
+        public bool IsAdmin
+        {
+            get { return _isAdmin; }
+            set { _isAdmin = value; }
+        }
+
+        public User(string username, string name, string surname, string password)
         {
             _username = username;
+            _name = name;
+            _surname = surname;
             _password = CalculateHash(password);
+            _isAdmin = false;
         }
 
         public User()

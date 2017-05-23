@@ -5,26 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:movieapplication"
         mc:Ignorable="d"
-        Title="Кинематографичский портал" Height="500" Width="750">
+        Title="Кинематографичский портал" Height="500" Width="750" Loaded="Page_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="listBox" DisplayMemberPath="Info" SelectionChanged="listBox_SelectionChanged" Margin="10,10" Grid.RowSpan="6"/>
-        <Button x:Name="buttonCreate" Content="Добавить" Grid.Column="1" Margin="10,10" Click="buttonCreate_Click"/>
-        <Button x:Name="buttonRemove" Content="Удалить" Grid.Column="1" Grid.Row="1" Margin="10,10" Click="buttonRemove_Click" IsEnabled="False"/>
-        <Button x:Name="buttonSearch" Content="Поиск" Grid.Column="1" Grid.Row="2" Margin="10, 10" Click="buttonSearch_Click"/>
-        <Button x:Name="buttonReset" Content="Сброс поиска" Grid.Column="1" Grid.Row="3" Margin="10,10" Click="buttonReset_Click" IsEnabled="False"/>
-        <Button x:Name="buttonLogout" Content="Выйти" Grid.Column="1" Grid.Row="6" Margin="10,10" Click="buttonLogout_Click"/>
+        <ListBox x:Name="listBox" DisplayMemberPath="Info" SelectionChanged="listBox_SelectionChanged" Margin="10,10" Grid.RowSpan="9" FontSize="13.333"/>
+        <Button x:Name="buttonCreate" Content="Добавить" Grid.Column="1" Margin="10,10" Click="buttonCreate_Click" FontSize="16"/>
+        <Button x:Name="buttonUpdate" Content="Изменить" Grid.Column="1" Grid.Row="1" Margin="10,10" Click="buttonUpdate_Click" IsEnabled="False" FontSize="16"/>
+        <Button x:Name="buttonRemove" Content="Удалить" Grid.Column="1" Grid.Row="2" Margin="10,10" Click="buttonRemove_Click" IsEnabled="False" FontSize="16"/>
+        <Button x:Name="buttonSearch" Content="Поиск" Grid.Column="1" Grid.Row="4" Margin="10, 10" Click="buttonSearch_Click" FontSize="16"/>
+        <Button x:Name="buttonReset" Content="Сброс поиска" Grid.Column="1" Grid.Row="5" Margin="10,10" Click="buttonReset_Click" IsEnabled="False" FontSize="16"/>
+        <TextBlock x:Name="textBlockGreeting" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="7" TextWrapping="Wrap" Text="Здравствуйте!" VerticalAlignment="Bottom" FontSize="16"/>
+        <Button x:Name="buttonLogout" Content="Выйти" Grid.Column="1" Grid.Row="8" Margin="10,10" Click="buttonLogout_Click" FontSize="16"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" Text="Быстрый поиск" VerticalAlignment="Top" FontSize="16" Margin="10"/>
+        <TextBox x:Name="textBoxSearch" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Height="22" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="205" TextChanged="textBoxSearch_TextChanged"/>
     </Grid>
 </Page
       >
