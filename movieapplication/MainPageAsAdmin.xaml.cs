@@ -37,13 +37,13 @@ namespace movieapplication
             var window = new AddMovieWindow();
             if (window.ShowDialog().Value)
             {
-                Data.Movies.Add(window.newMovie);
+                Data.Movies.Add(window.NewMovie);
                 Data.UpdateMoviesData();
                 Data.IsSearched = false;
                 buttonReset.IsEnabled = false;
                 RefreshListBox();
                 DisableButtons();
-                Logger.Log($"Добавлен новый фильм: \"{window.newMovie.Name}\"");
+                Logger.Log($"Добавлен новый фильм: \"{window.NewMovie.Name}\"");
             }
         }
 
@@ -91,7 +91,7 @@ namespace movieapplication
         }
 
 
-        private void RefreshListBox()
+        public void RefreshListBox()
         {
             listBox.ItemsSource = null;
             listBox.ItemsSource = !Data.IsSearched ? Data.Movies : Data.MoviesSearch;

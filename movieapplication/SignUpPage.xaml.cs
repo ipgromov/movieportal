@@ -89,14 +89,27 @@ namespace movieapplication
             }
 
             Data.ReadUsersData();
-            Data.Users.Add(new User(textBoxUsername.Text, textBoxName.Text, textBoxSurname.Text, passwordBox.Password));
+            int usersCount = Data.Users.Count;
+            if (usersCount == 0)
+            {
+                Data.Users.Add(new User(textBoxUsername.Text, textBoxName.Text, textBoxSurname.Text, passwordBox.Password, true));
+                MessageBox.Show($"{textBoxName.Text}, вы были успешно зарегистрированы в системе, как \"{textBoxUsername.Text}\".\nТак как вы являетесь первым пользователем, вам предоставлены права администратора.", "Успешно!");
+            }
+            else
+            {
+                Data.Users.Add(new User(textBoxUsername.Text, textBoxName.Text, textBoxSurname.Text, passwordBox.Password));
+                MessageBox.Show($"{textBoxName.Text}, вы были успешно зарегистрированы в системе, как \"{textBoxUsername.Text}\"", "Успешно!");
+            }
+
             Data.LoggedUser = Data.Users.LastOrDefault();
-            MessageBox.Show($"{textBoxName.Text}, вы были успешно зарегистрированы в системе, как \"{textBoxUsername.Text}\"", "Успешно!");
             Data.UpdateUsersData();
             Pages.ChangeFrameSize(500, 750);
             Pages.MainPageAsUser.UpdateSearchState();
             Logger.Log($"Регистрация и вход пользователя: \"{textBoxUsername.Text}\"");
-            NavigationService.Navigate(Pages.MainPageAsUser);
+            if (Data.LoggedUser != null && Data.LoggedUser.IsAdmin)
+                NavigationService.Navigate(Pages.MainPageAsAdmin);
+            if (Data.LoggedUser != null && !Data.LoggedUser.IsAdmin)
+                NavigationService.Navigate(Pages.MainPageAsUser);
         }
 
         private void buttonLogin_Click(object sender, RoutedEventArgs e)
@@ -133,6 +146,15 @@ namespace movieapplication
                 textBlockUsernameCheck.Text = "Для проверки введите логин";
                 textBlockUsernameCheck.Foreground = Brushes.Black;
             }
+        }
+
+        private void TextBlock_Loaded(object sender, RoutedEventArgs e)
+        {
+            textBoxUsername.Text = "";
+            textBoxName.Text = "";
+            textBoxSurname.Text = "";
+            textBlockUsernameCheck.Text = "Для проверки введите логин";
+            textBlockUsernameCheck.Foreground = Brushes.Black;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace movieapplication
 
         Movie _newMovie;
 
-        public Movie newMovie
+        public Movie NewMovie
         {
             get { return _newMovie; }
         }
@@ -32,6 +32,7 @@ namespace movieapplication
         public AddMovieWindow()
         {
             InitializeComponent();
+            comboBox.ItemsSource = Data.Genres;
         }
 
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
@@ -58,14 +59,22 @@ namespace movieapplication
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(textBoxGenre.Text))
+            if (int.Parse(textBoxYear.Text) < 1880 || int.Parse(textBoxYear.Text) > 2030)
             {
-                MessageBox.Show("Необходимо ввести жанр", "Ошибка!");
-                textBoxGenre.Focus();
+                MessageBox.Show("Введен неприемлимый год выпуска", "Ошибка!");
+                textBoxYear.Focus();
                 return;
             }
 
-            _newMovie = new Movie(textBoxName.Text, year, textBoxCountry.Text, textBoxGenre.Text);
+            if (comboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Необходимо выбрать жанр", "Ошибка!");
+                comboBox.Focus();
+                return;
+            }
+
+            Genre selectedGenre = (Genre)comboBox.SelectedItem;
+            _newMovie = new Movie(textBoxName.Text, year, textBoxCountry.Text, selectedGenre.Id);
 
             // Close current window
             DialogResult = true;

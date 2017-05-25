@@ -59,6 +59,15 @@ namespace movieapplication
             _isAdmin = false;
         }
 
+        public User(string username, string name, string surname, string password, bool isAdmin)
+        {
+            _username = username;
+            _name = name;
+            _surname = surname;
+            _password = CalculateHash(password);
+            _isAdmin = isAdmin;
+        }
+
         public User()
         {
 

@@ -21,6 +21,8 @@ namespace movieapplication
     /// </summary>
     public partial class LoginPage : Page
     {
+        private Brush backgroundBrush = new SolidColorBrush(Color.FromArgb(255, (byte)255, (byte)220, (byte)220));
+
         public LoginPage()
         {
             InitializeComponent();
@@ -28,6 +30,8 @@ namespace movieapplication
 
         private void buttonLogin_Click(object sender, RoutedEventArgs e)
         {
+            UsernameAlertOff();
+            PasswordAlertOff();
             string username = textBoxUsername.Text;
             if (!string.IsNullOrWhiteSpace(username))
             {
@@ -61,6 +65,7 @@ namespace movieapplication
                             else
                             {
                                 passwordBox.Password = "";
+                                PasswordAlertOn();
                                 MessageBox.Show("Неверный пароль", "Ошибка!");
                                 passwordBox.Focus();
                             }
@@ -68,7 +73,8 @@ namespace movieapplication
                     }
                     if (!isFound)
                     {
-                        MessageBox.Show("Пользователя с таким псевдонимом не существует", "Ошибка!");
+                        UsernameAlertOn();
+                        MessageBox.Show("Пользователя с таким логином не существует", "Ошибка!");
                         textBoxUsername.Focus();
                     }
                     else
@@ -79,13 +85,15 @@ namespace movieapplication
                 }
                 else
                 {
+                    PasswordAlertOn();
                     MessageBox.Show("Необходимо ввести пароль", "Ошибка!");
                     passwordBox.Focus();
                 }
             }
             else
             {
-                MessageBox.Show("Необходимо ввести псевдоним", "Ошибка!");
+                UsernameAlertOn();
+                MessageBox.Show("Необходимо ввести логин", "Ошибка!");
                 textBoxUsername.Focus();
             }
         }
@@ -108,6 +116,33 @@ namespace movieapplication
         {
             Pages.ChangeFrameSize(400, 370);
             NavigationService.Navigate(Pages.SignUpPage);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            UsernameAlertOff();
+            PasswordAlertOff();
+            textBoxUsername.Text = "";
+        }
+
+        private void UsernameAlertOn()
+        {
+            textBoxUsername.Background = backgroundBrush;
+        }
+
+        private void UsernameAlertOff()
+        {
+            textBoxUsername.ClearValue(BackgroundProperty);
+        }
+
+        private void PasswordAlertOn()
+        {
+            passwordBox.Background = backgroundBrush;
+        }
+
+        private void PasswordAlertOff()
+        {
+            passwordBox.ClearValue(BackgroundProperty);
         }
     }
 }

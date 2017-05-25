@@ -36,6 +36,7 @@ namespace movieapplication
             InitializeComponent();
             _receivedMovie = receivedMovie;
             ReceiveMovieInfo();
+            comboBox.ItemsSource = Data.Genres;
         }
 
         public void ReceiveMovieInfo()
@@ -43,7 +44,19 @@ namespace movieapplication
             textBoxName.Text = _receivedMovie.Name;
             textBoxCountry.Text = _receivedMovie.Country;
             textBoxYear.Text = _receivedMovie.Year.ToString();
-            textBoxGenre.Text = _receivedMovie.Genre;
+            Genre receivedGenre = null;
+            foreach (Genre genre in Data.Genres)
+            {
+                if (genre.Id == _receivedMovie.GenreId)
+                {
+                    receivedGenre = genre;
+                    break;
+                }
+            }
+            if (receivedGenre != null)
+                comboBox.SelectedItem = receivedGenre;
+            else
+                comboBox.SelectedIndex = 0;
         }
 
         private void buttonChange_Click(object sender, RoutedEventArgs e)
@@ -70,14 +83,15 @@ namespace movieapplication
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(textBoxGenre.Text))
+            if (comboBox.SelectedIndex == -1)
             {
-                MessageBox.Show("Необходимо ввести жанр", "Ошибка!");
-                textBoxGenre.Focus();
+                MessageBox.Show("Необходимо выбрать жанр", "Ошибка!");
+                comboBox.Focus();
                 return;
             }
 
-            _changedMovie = new Movie(_receivedMovie.Id, textBoxName.Text, year, textBoxCountry.Text, textBoxGenre.Text);
+            Genre selectedGenre = (Genre)comboBox.SelectedItem;
+            _changedMovie = new Movie(_receivedMovie.Id, textBoxName.Text, year, textBoxCountry.Text, selectedGenre.Id);
 
             // Close current window
             DialogResult = true;

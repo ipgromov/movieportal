@@ -70,6 +70,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DeleteGenreWindow.xaml.cs">
+      <DependentUpon>DeleteGenreWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeGenreWindow.xaml.cs">
+      <DependentUpon>ChangeGenreWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddGenreWindow.xaml.cs">
+      <DependentUpon>AddGenreWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChangeMovieWindow.xaml.cs">
       <DependentUpon>ChangeMovieWindow.xaml</DependentUpon>
     </Compile>
@@ -77,6 +86,7 @@
       <DependentUpon>ControlPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data.cs" />
+    <Compile Include="Genre.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -98,6 +108,18 @@
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
+    <Page Include="DeleteGenreWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ChangeGenreWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddGenreWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ChangeMovieWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

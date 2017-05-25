@@ -13,7 +13,8 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
@@ -21,13 +22,19 @@
             <ColumnDefinition Width="7*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="listBox" DisplayMemberPath="Info" Margin="10,10" Grid.RowSpan="8" FontSize="13.333" SelectionChanged="listBox_SelectionChanged"/>
-        <Button x:Name="buttonChange" IsEnabled="False" Content="Изменить уровень прав" Grid.Column="1" Grid.Row="1" Margin="10, 10" FontSize="16" Click="buttonChange_Click"/>
-        <Button x:Name="buttonDelete" IsEnabled="False" Content="Удалить" Grid.Column="1" Grid.Row="2" Margin="10,10" FontSize="16" Click="buttonDelete_Click"/>
-        <Button x:Name="buttonBack" Content="Назад" Click="buttonBack_Click" Grid.Column="1" Grid.Row="7" Margin="10,10" FontSize="16"/>
-        <TextBlock x:Name="textBlockGreeting" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="6" TextWrapping="Wrap" Text="Здравствуйте!" VerticalAlignment="Bottom" FontSize="16"/>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" Text="Быстрый поиск" VerticalAlignment="Top" FontSize="16" Margin="10"/>
-        <TextBox x:Name="textBoxSearch" Grid.Column="1" HorizontalAlignment="Center" Height="22" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="205" TextChanged="textBoxSearch_TextChanged"/>
+        <ListBox x:Name="listBoxUsers" DisplayMemberPath="Info" Margin="10,10" Grid.RowSpan="4" FontSize="13.333" SelectionChanged="listBoxUsers_SelectionChanged"/>
+        <Button x:Name="buttonChangeUser" IsEnabled="False" Content="Изменить уровень прав" Grid.Column="1" Grid.Row="1" Margin="10, 10" FontSize="16" Click="buttonChangeUser_Click"/>
+        <Button x:Name="buttonDeleteUser" IsEnabled="False" Content="Удалить" Grid.Column="1" Grid.Row="2" Margin="10,10" FontSize="16" Click="buttonDeleteUser_Click"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Grid.Row="4" TextWrapping="Wrap" Text="Жанры - Быстрый поиск" VerticalAlignment="Top" FontSize="16" Margin="10"/>
+        <TextBox x:Name="textBoxSearchGenres" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Height="22" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="205" TextChanged="textBoxSearchGenres_TextChanged"/>
+        <ListBox x:Name="listBoxGenres" DisplayMemberPath="Name" Margin="10,10" Grid.Row="4" Grid.RowSpan="4" FontSize="13.333" SelectionChanged="listBoxGenres_SelectionChanged"/>
+        <Button x:Name="buttonBack" Content="Назад" Click="buttonBack_Click" Grid.Column="1" Grid.Row="8" Margin="10,10" FontSize="16"/>
+        <TextBlock x:Name="textBlockGreeting" Grid.Column="0" Margin="20,0" HorizontalAlignment="Right" Grid.Row="8" TextWrapping="Wrap" Text="Здравствуйте!" VerticalAlignment="Center" FontSize="16"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" Text="Пользователи - Быстрый поиск" VerticalAlignment="Top" Margin="0,10" FontSize="14.667"/>
+        <TextBox x:Name="textBoxSearchUsers" Grid.Column="1" HorizontalAlignment="Center" Height="22" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="205" TextChanged="textBoxSearchUsers_TextChanged"/>
+        <Button x:Name="buttonAddGenre" Content="Добавить" Click="buttonAddGenre_Click" Grid.Column="1" Grid.Row="5" Margin="10,10" FontSize="16"/>
+        <Button x:Name="buttonChangeGenre" Content="Изменить" Click="buttonChangeGenre_Click" Grid.Column="1" Grid.Row="6" Margin="10,10" FontSize="16" IsEnabled="False"/>
+        <Button x:Name="buttonDeleteGenre" Content="Удалить с заменой" Click="buttonDeleteGenre_Click" Grid.Column="1" Grid.Row="7" Margin="10,10" FontSize="16" IsEnabled="False"/>
     </Grid>
 </Page
       >

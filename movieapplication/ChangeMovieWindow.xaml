@@ -5,21 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:movieapplication"
         mc:Ignorable="d"
-        Title="Изменить фильм" Height="200" Width="300" ResizeMode="NoResize">
+        Title="Изменить фильм" Height="200" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Left"  Margin="10,10,0,0" TextWrapping="Wrap" Text="Название" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxName"  Height="25" Margin="10,30,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-        <TextBlock HorizontalAlignment="Left"  Margin="10,60,0,0" TextWrapping="Wrap" Text="Cтрана" VerticalAlignment="Top" />
-        <TextBox x:Name="textBoxCountry" Height="25" Margin="10,80, 10, 0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left"  Margin="10,110,0,0" TextWrapping="Wrap" Text="Жанр" VerticalAlignment="Top" />
-        <TextBox x:Name="textBoxGenre" Height="25" Margin="10,130,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left"  Margin="10,60,0,0" TextWrapping="Wrap" Text="Год выпуска" VerticalAlignment="Top" Grid.Column="1" />
-        <TextBox x:Name="textBoxYear" Height="25" Margin="10,80,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1"/>
-        <Button x:Name="buttonChange" Content="Изменить" Grid.Column="1"  Height="25" Margin="10,130,10,0" VerticalAlignment="Top" Click="buttonChange_Click"/>
-
+        <TextBlock HorizontalAlignment="Left"  Margin="10,0" TextWrapping="Wrap" Text="Название" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="textBoxName"  Height="25" Margin="10,0" TextWrapping="Wrap" Grid.ColumnSpan="2" Grid.Row="1" />
+        <TextBlock HorizontalAlignment="Left"  Margin="10,0" TextWrapping="Wrap" Text="Cтрана" Grid.Row="2" />
+        <TextBox x:Name="textBoxCountry" Height="25" Margin="10,0" TextWrapping="Wrap" Grid.Row="3"/>
+        <TextBlock HorizontalAlignment="Left"  Margin="10,0" TextWrapping="Wrap" Text="Жанр" Grid.Row="4" />
+        <TextBlock HorizontalAlignment="Left"  Margin="10,0" TextWrapping="Wrap" Text="Год выпуска" Grid.Column="1" Grid.Row="2" />
+        <TextBox x:Name="textBoxYear" Height="25" Margin="10,0" TextWrapping="Wrap" Grid.Column="1" Grid.Row="3"/>
+        <Button x:Name="buttonAdd" Content="Изменить" Grid.Column="1"  Height="25" Margin="10,0" Click="buttonChange_Click" Grid.Row="5"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Center" Margin="0,0" Width="127" Height="25" Grid.Row="5">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
     </Grid>
 </Window>

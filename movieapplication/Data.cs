@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Serialization;
+using System.Windows;
 
 namespace movieapplication
 {
@@ -13,6 +14,8 @@ namespace movieapplication
         static private List<User> _users = new List<User>();
 
         static private List<Movie> _movies = new List<Movie>();
+
+        static private List<Genre> _genres = new List<Genre>();
 
         static private List<Movie> _moviesSearch = new List<Movie>();
 
@@ -30,6 +33,12 @@ namespace movieapplication
         {
             get { return _movies; }
             set { _movies = value; }
+        }
+
+        static public List<Genre> Genres
+        {
+            get { return _genres; }
+            set { _genres = value; }
         }
 
         static public List<Movie> MoviesSearch
@@ -63,10 +72,18 @@ namespace movieapplication
         {
             if (File.Exists("users.xml"))
             {
-                using (FileStream fs = new FileStream("users.xml", FileMode.Open))
+                try
                 {
-                    XmlSerializer xml = new XmlSerializer(typeof(List<User>));
-                    _users = (List<User>)xml.Deserialize(fs);
+                    using (FileStream fs = new FileStream("users.xml", FileMode.Open))
+                    {
+                        XmlSerializer xml = new XmlSerializer(typeof(List<User>));
+                        _users = (List<User>)xml.Deserialize(fs);
+                    }
+                }
+                catch
+                {
+                    UpdateUsersData();
+                    MessageBox.Show("Файл с информацией о пользователях повреждён. \nИнформация не была восстановлена.", "Ошибка!");
                 }
             }
         }
@@ -84,11 +101,54 @@ namespace movieapplication
         {
             if (File.Exists("movies.xml"))
             {
-                using (FileStream fs = new FileStream("movies.xml", FileMode.Open))
+                try
                 {
-                    XmlSerializer xml = new XmlSerializer(typeof(List<Movie>));
-                    _movies = (List<Movie>)xml.Deserialize(fs);
+                    using (FileStream fs = new FileStream("movies.xml", FileMode.Open))
+                    {
+                        XmlSerializer xml = new XmlSerializer(typeof(List<Movie>));
+                        _movies = (List<Movie>)xml.Deserialize(fs);
+                    }
                 }
+                catch
+                {
+                    UpdateMoviesData();
+                    MessageBox.Show("Файл с информацией о фильмах повреждён. \nИнформация не была восстановлена.", "Ошибка!");
+                }
+            }
+        }
+
+        static public void UpdateGenresData()
+        {
+            using (FileStream fs = new FileStream("genres.xml", FileMode.Create))
+            {
+                XmlSerializer xml = new XmlSerializer(typeof(List<Genre>));
+                xml.Serialize(fs, _genres);
+            }
+        }
+
+        static public void ReadGenresData()
+        {
+            if (File.Exists("genres.xml"))
+            {
+                try
+                {
+                    using (FileStream fs = new FileStream("genres.xml", FileMode.Open))
+                    {
+                        XmlSerializer xml = new XmlSerializer(typeof(List<Genre>));
+                        _genres = (List<Genre>)xml.Deserialize(fs);
+                    }
+                }
+                catch
+                {
+                    _genres = DefaultGenreList;
+                    UpdateGenresData();
+                    MessageBox.Show("Файл с информацией о жанрах повреждён. \nИнформация не была восстановлена.", "Ошибка!");
+                }
+            }
+            else
+            {
+                _genres = DefaultGenreList;
+                UpdateGenresData();
             }
         }
 
@@ -106,6 +166,17 @@ namespace movieapplication
                     return false;
             }
             return true;
+        }
+
+        static private List<Genre> DefaultGenreList
+        {
+            get
+            {
+                return new List<Genre>() {new Genre(0, "Другое"), new Genre(1, "Драма"), new Genre(2, "Комедия"), new Genre(3, "Триллер"),
+                                             new Genre(4, "Мелодрама"), new Genre(5, "Ужасы"), new Genre(6, "Мюзикл"), new Genre(7,"Фантастика"),
+                                             new Genre(8, "Мультипликация"),new Genre(9, "Докуметальный"), new Genre(10,"Биография"),
+                                             new Genre(11,"Исторический")};
+            }
         }
     }
 }

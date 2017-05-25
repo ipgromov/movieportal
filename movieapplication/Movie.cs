@@ -40,12 +40,12 @@ namespace movieapplication
             set { _country = value; }
         }
 
-        private string _genre;
+        private int _genreId;
 
-        public string Genre
+        public int GenreId
         {
-            get { return _genre; }
-            set { _genre = value; }
+            get { return _genreId; }
+            set { _genreId = value; }
         }
 
         public Movie()
@@ -53,29 +53,43 @@ namespace movieapplication
 
         }
 
-        public Movie(string name, int year, string country, string genre)
+        public Movie(string name, int year, string country, int genreId)
         {
             _id = IdFormer();
             _name = name;
             _year = year;
             _country = country;
-            _genre = genre;
+            _genreId = genreId;
         }
 
-        public Movie(int id, string name, int year, string country, string genre)
+        public Movie(int id, string name, int year, string country, int genreId)
         {
             _id = id;
             _name = name;
             _year = year;
             _country = country;
-            _genre = genre;
+            _genreId = genreId;
         }
 
         public string Info
         {
             get
             {
-                return $"{_name} ({_year}), {_country}. Жанр: {_genre}.";
+                return $"{_name} ({_year}), {_country}. Жанр: {Genre}.";
+            }
+        }
+
+        public string Genre
+        {
+            get
+            {
+                foreach(Genre genre in Data.Genres)
+                {
+                    if (genre.Id == _genreId)
+                        return genre.Name;
+                }
+
+                return "Ошибка";
             }
         }
 

@@ -30,7 +30,7 @@
         <Button x:Name="buttonReset" Content="Сброс поиска" Grid.Column="1" Grid.Row="5" Margin="10,10" Click="buttonReset_Click" IsEnabled="False" FontSize="16"/>
         <TextBlock x:Name="textBlockGreeting" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="7" TextWrapping="Wrap" Text="Здравствуйте!" VerticalAlignment="Bottom" FontSize="16"/>
         <Button x:Name="buttonLogout" Content="Выйти" Grid.Column="1" Grid.Row="8" Margin="10,10" Click="buttonLogout_Click" FontSize="16"/>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" Text="Быстрый поиск" VerticalAlignment="Top" FontSize="16" Margin="10"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" Text="Фильмы - Быстрый поиск" VerticalAlignment="Top" FontSize="16" Margin="10"/>
         <TextBox x:Name="textBoxSearch" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Height="22" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="205" TextChanged="textBoxSearch_TextChanged"/>
         <Button x:Name="button" Content="Панель контроля" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="7" VerticalAlignment="Top" Width="205" FontSize="16" Click="button_Click"/>
     </Grid>

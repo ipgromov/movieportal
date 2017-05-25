@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:movieapplication"
       mc:Ignorable="d" 
       d:DesignHeight="220" d:DesignWidth="220"
-      Title="LoginPage">
+      Title="LoginPage" Loaded="Page_Loaded">
 
     <Grid>
         <Grid.RowDefinitions>
