@@ -73,14 +73,14 @@ namespace movieapplication
                 var window = new ChangeMovieWindow(Data.Movies[selectedListIndex]);
                 if (window.ShowDialog().Value)
                 {
-                    Data.Movies[selectedListIndex] = window.changedMovie;
+                    Data.Movies[selectedListIndex] = window.ChangedMovie;
                     Data.UpdateMoviesData();
                     Data.IsSearched = false;
                     RefreshListBox();
                     DisableButtons();
-                    Logger.Log(selectedMovie.Name == window.changedMovie.Name ? 
-                        $"Изменён фильм: \"{window.changedMovie.Name}\"" : 
-                        $"Изменён фильм: \"{selectedMovie.Name}\" -> \"{window.changedMovie.Name}\"");
+                    Logger.Log(selectedMovie.Name == window.ChangedMovie.Name ? 
+                        $"Изменён фильм: \"{window.ChangedMovie.Name}\"" : 
+                        $"Изменён фильм: \"{selectedMovie.Name}\" -> \"{window.ChangedMovie.Name}\"");
                 }
             }
         }

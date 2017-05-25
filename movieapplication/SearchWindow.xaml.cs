@@ -43,7 +43,6 @@ namespace movieapplication
 
             _searchQuery = nameSearch.Text;
 
-            // Close current window
             DialogResult = true;
         }
     }

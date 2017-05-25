@@ -8,8 +8,6 @@ namespace movieapplication
 {
     static class Pages
     {
-        // Создаем каждую страницу один раз на все время запуска программы
-        // Для этого используем static
         private static MainPage _mainPage = new MainPage();
 
         private static LoginPage _loginPage = new LoginPage();

@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace movieapplication
 {
     /// <summary>
-    /// Логика взаимодействия для AddMovieWindow.xaml
+    /// Логика взаимодействия для ChangeMovieWindow.xaml
     /// </summary>
     /// 
     public partial class ChangeMovieWindow : Window
@@ -23,7 +23,7 @@ namespace movieapplication
 
         private Movie _changedMovie;
 
-        public Movie changedMovie
+        public Movie ChangedMovie
         {
             get { return _changedMovie; }
         }
@@ -93,7 +93,6 @@ namespace movieapplication
             Genre selectedGenre = (Genre)comboBox.SelectedItem;
             _changedMovie = new Movie(_receivedMovie.Id, textBoxName.Text, year, textBoxCountry.Text, selectedGenre.Id);
 
-            // Close current window
             DialogResult = true;
         }
     }

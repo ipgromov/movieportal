@@ -76,7 +76,6 @@ namespace movieapplication
             Genre selectedGenre = (Genre)comboBox.SelectedItem;
             _newMovie = new Movie(textBoxName.Text, year, textBoxCountry.Text, selectedGenre.Id);
 
-            // Close current window
             DialogResult = true;
         }
     }
