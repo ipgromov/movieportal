@@ -16,6 +16,8 @@ namespace movieapplication
 
         private static SignUpPage _signUpPage = new SignUpPage();
 
+        private static ControlPage _controlPage = new ControlPage();
+
         private static MainPageAsAdmin _mainPageAsAdmin = new MainPageAsAdmin();
 
         private static MainPageAsUser _mainPageAsUser = new MainPageAsUser();
@@ -43,6 +45,14 @@ namespace movieapplication
             get
             {
                 return _signUpPage;
+            }
+        }
+
+        public static ControlPage ControlPage
+        {
+            get
+            {
+                return _controlPage;
             }
         }
 

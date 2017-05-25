@@ -70,5 +70,13 @@ namespace movieapplication
             var hash = md5.ComputeHash(Encoding.ASCII.GetBytes(password));
             return Convert.ToBase64String(hash);
         }
+
+        public string Info
+        {
+            get
+            {
+                return $"Пользователь: {_username}; статус: {(_isAdmin ? "администратор" : "обычный пользователь")}.";
+            }
+        }
     }
 }

@@ -56,6 +56,7 @@ namespace movieapplication
                 if (Data.IsSearched)
                     Data.MoviesSearch.RemoveAll(movie => movie.Id == selectedMovie.Id);
 
+                textBoxSearch.Text = "";
                 Data.UpdateMoviesData();
                 RefreshListBox();
                 Logger.Log($"Удален фильм: \"{selectedMovie.Name}\"");
@@ -179,6 +180,11 @@ namespace movieapplication
             }
             listBox.ItemsSource = null;
             listBox.ItemsSource = dynamicMoviesSearch;
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(Pages.ControlPage);
         }
     }
 }

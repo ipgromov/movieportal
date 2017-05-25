@@ -73,6 +73,9 @@
     <Compile Include="ChangeMovieWindow.xaml.cs">
       <DependentUpon>ChangeMovieWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ControlPage.xaml.cs">
+      <DependentUpon>ControlPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Data.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="LoginPage.xaml.cs">
@@ -100,6 +103,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AddMovieWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:movieapplication"
         mc:Ignorable="d"
-        Title="Кинематографичский портал" Height="540" Width="770" ResizeMode="NoResize">
+        Title="Кинематографичский портал" Height="540" Width="770" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Frame Name="frameMain" NavigationUIVisibility="Hidden">
 

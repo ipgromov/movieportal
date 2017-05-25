@@ -32,6 +32,7 @@
         <Button x:Name="buttonLogout" Content="Выйти" Grid.Column="1" Grid.Row="8" Margin="10,10" Click="buttonLogout_Click" FontSize="16"/>
         <TextBlock Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" Text="Быстрый поиск" VerticalAlignment="Top" FontSize="16" Margin="10"/>
         <TextBox x:Name="textBoxSearch" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Height="22" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="205" TextChanged="textBoxSearch_TextChanged"/>
+        <Button x:Name="button" Content="Панель контроля" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="7" VerticalAlignment="Top" Width="205" FontSize="16" Click="button_Click"/>
     </Grid>
 </Page
       >

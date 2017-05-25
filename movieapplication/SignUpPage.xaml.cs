@@ -88,12 +88,14 @@ namespace movieapplication
                 return;
             }
 
-
+            Data.ReadUsersData();
             Data.Users.Add(new User(textBoxUsername.Text, textBoxName.Text, textBoxSurname.Text, passwordBox.Password));
+            Data.LoggedUser = Data.Users.LastOrDefault();
             MessageBox.Show($"{textBoxName.Text}, вы были успешно зарегистрированы в системе, как \"{textBoxUsername.Text}\"", "Успешно!");
             Data.UpdateUsersData();
             Pages.ChangeFrameSize(500, 750);
             Pages.MainPageAsUser.UpdateSearchState();
+            Logger.Log($"Регистрация и вход пользователя: \"{textBoxUsername.Text}\"");
             NavigationService.Navigate(Pages.MainPageAsUser);
         }
 
